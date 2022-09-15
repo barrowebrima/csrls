@@ -1,7 +1,7 @@
 <?php
 $server="localhost";
 $user="root";
-$pass="1";
+$pass="";
 $dbname="csrls";
 $conn=mysqli_connect($server,$user,$pass,$dbname);
 if($conn)
