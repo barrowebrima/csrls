@@ -1,5 +1,3 @@
-
-
 <?php 
     include("db.php");
     
@@ -26,8 +24,8 @@
         $data = $stmt_result->fetch_assoc();
         if($data['Password'] === $password)
         {
-           header('Location:applicants.php');
-          echo "<h2>Login Successfully</h2>";
+header('Location:applicants.php');
+          //echo "<h2>Login Successfully</h2>";
         }
         else{
           echo "<h2>Invalid Email or Password</h2>";

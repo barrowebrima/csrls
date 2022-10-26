@@ -4,12 +4,8 @@ $user="root";
 $pass="";
 $dbname="csrls";
 $conn=mysqli_connect($server,$user,$pass,$dbname);
-if($conn)
+if(!$conn)
 {
-echo ""."<br>";
-}
-else
-{
-echo mysqli_connect_error();
+die('could not connect mysqli server:'.mysqli_error());
 }
 ?>

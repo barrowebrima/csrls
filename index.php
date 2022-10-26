@@ -1,11 +1,41 @@
-    <?php
-    if(isset($_POST["t1"]))
+<?php 
+include 'db.php';        
+if(isset($_POST['t1']))
     {
-     header('Location:uploads.php');
-    }
-    ?>
+    $fn=$_POST['p1'];           
+    $ln=$_POST['p2'];           
+    $g=$_POST['p3'];            
+    $e=$_POST['p4'];
+    $p=$_POST['p5'];
+    $dob=$_POST['p6'];
+    $lt=$_POST['p7'];
+    $la=$_POST['p8'];
+    $mda=$_POST['p9'];
+    $d=$_POST['p10'];
+    $c=$_POST['p11'];
+    $en=$_POST['p12'];
+    $cmd="insert into loan_applicants (FirstName, Lastname, Gender, Email, Phone, DOB, LoanType, LoanAmount, MDA, Designation, Confirmation, EmployeeNumber) values('$fn','$ln','$g','$e','$p','$dob','$lt','$la','$mda','$d','$c','$en')";
 
-    <!DOCTYPE html>
+    if(mysqli_query($conn, $cmd))
+    {
+      header('Location: uploads.php');
+      exit();
+    }
+    else{
+      $error = mysqli_error($conn);
+      echo "<div class=\"toast show position-fixed top-0 end-0 m-3\" style=\"z-index:2000\" role=\"alert\">
+        <div class=\"toast-header\">
+          <strong class=\"me-auto\">Error</strong>
+        </div>
+        <div class=\"toast-body\">$error</div>
+      </div>
+      ";
+    }
+     mysqli_close($conn);         
+}
+?>
+
+<!DOCTYPE html>
     <html lang="en">
       <head>
         <meta charset="UTF-8" />
@@ -29,7 +59,7 @@
       </head>
       <body>
         <?php
-      //include("data.php");
+      //include("uploads.php");
       //include("db.php");
       ?>
         <!-- Navbar -->
@@ -221,14 +251,10 @@
               <div class="col-md p-5">
                 <h2>Benefits</h2>
                 <p class="lead">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Similique deleniti possimus magnam corporis ratione facere!
+                   The impact of the Loan Scheme within the Civil Service is very positive, the Loan Scheme contributed tremendously to the lives of civil servants in terms of improving their quality of life and social status
                 </p>
                 <p>
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cumque
-                  reiciendis eius autem eveniet mollitia, at asperiores suscipit
-                  quae similique laboriosam iste minus placeat odit velit quos,
-                  nulla architecto amet voluptates?
+                  As of now 1,207 civil servants benefited from the Personal Loan of the Loan Scheme, 200 civil servants benefited from the Car Loan, and 140 benefited from the Housing loan.
                 </p>
                 <a href="#" class="btn btn-light mt-3">
                   <i class="bi bi-chevron-right"></i> Read More
@@ -529,35 +555,35 @@
                     <label for="first-name" class="col-form-label">
                       * First Name:
                     </label>
-                    <input name=p1 type="text" required="required" class="form-control" id="first-name" />
+                    <input name="p1" type="text" required="required" class="form-control" id="first-name" />
                   </div>
                   <div class="mb-3">
                     <label for="last-name" class="col-form-label">* Last Name:</label>
-                    <input name=p2 type="text" required="required" class="form-control" id="last-name" />
+                    <input name="p2" type="text" required="required" class="form-control" id="last-name" />
                   </div>
                   <div class="mb-3">
                     <label for="gender" class="col-form-label">* Gender:</label>
-                    <input name=p3 type="radio"  id="male"  value="Male" />
+                    <input name="p3" type="radio"  id="male"  value="Male" />
                      <label for="male">Male</label>
-                    <input  name=p3 type="radio"  id="female" value="Female" />
+                    <input  name="p3" type="radio"  id="female" value="Female" />
                      <label for="female">Female</label>
                   </div>
                   <div class="mb-3">
                     <label for="email" class="col-form-label">* Email:</label>
-                    <input name=p4 type="email" required="required" class="form-control" id="email" />
+                    <input name="p4" type="email" required="required" class="form-control" id="email" />
                   </div>
                   <div class="mb-3">
                     <label for="phone" class="col-form-label">* Phone:</label>
-                    <input name=p5 type="tel" required="required" class="form-control" id="phone" />
+                    <input name="p5" type="tel" required="required" class="form-control" id="phone" />
                   </div>
                   <div class="mb-3">
                     <label for="dob" class="col-form-label">* DOB:</label>
-                    <input name=p6 type="date" required="required" class="form-control" id="phone" />
+                    <input name="p6" type="date" required="required" class="form-control" id="phone" />
                   </div>
                   
                   <div class="mb-3">
                     <label for="loantype" class="col-form-label">* Loan Type:</label>
-                    <select name=p7 type="text" required="required" id="loan" >
+                    <select name="p7" type="text" required="required" id="loan" >
                       <option value="personal">Personal</option>
                       <option value="housing">Housing</option>
                       <option value="car">Car</option>
@@ -565,30 +591,30 @@
                   </div>
                   <div class="mb-3">
                     <label for="loanamount" class="col-form-label">* Loan Amount:</label>
-                    <input name=p8 type="text" required="required" class="form-control" id="amount" />
+                    <input name="p8" type="number" required="required" class="form-control" id="amount" />
                   </div>
                   <div class="mb-3">
                     <label for="mda" class="col-form-label">* Ministry/Department/Agency:</label>
-                    <input name=p9 type="text" required="required" class="form-control" id="mda" />
+                    <input name="p9" type="text" required="required" class="form-control" id="mda" />
                   </div>
                   <div class="mb-3">
                     <label for="designation" class="col-form-label">* Designation:</label>
-                    <input name=p10 type="text" required="required" class="form-control" id="postion" />
+                    <input name="p10" type="text" required="required" class="form-control" id="postion" />
                   </div>
                   <div class="mb-3">
                     <label for="confirmation" class="col-form-label">* Confirmation:</label>
-                    <input name=p11 type="radio"  id="yes"  value="Yes" />
+                    <input name="p11" type="radio"  id="yes"  value="Yes" />
                      <label for="yes">Yes</label>
-                    <input name=p11 type="radio"  id="no"  value="No" />
+                    <input name="p11" type="radio"  id="no"  value="No" />
                      <label for="no">No</label>
                   </div>
                    <div class="mb-3">
                     <label for="payroll" class="col-form-label">* Employee Number:</label>
-                    <input name=p12 type="text" required="required" class="form-control" id="payroll" />
+                    <input name="p12" type="text" required="required" class="form-control" id="payroll" />
                   </div>
                 
                  <div>
-                   <input type="submit" class="btn btn-primary" name=t1 value="Submit">
+                   <input type="submit" class="btn btn-primary" name="t1" value="Submit">
                  </div>
                 </form>
                 
@@ -605,58 +631,7 @@
             </div>
           </div>
         </div>
-        <?php 
-    include("db.php");        
-    if(isset($_POST['t1']))
-              
-    {
-
-                
-    $fn=$_POST['p1'];           
-    $ln=$_POST['p2'];           
-    $g=$_POST['p3'];            
-    $e=$_POST['p4'];
-    $p=$_POST['p5'];
-    $dob=$_POST['p6'];
-    $lt=$_POST['p7'];
-    $la=$_POST['p8'];
-    $mda=$_POST['p9'];
-    $d=$_POST['p10'];
-    $c=$_POST['p11'];
-    $en=$_POST['p12'];
-
-              
-    $conn=mysqli_connect($server,$user,$pass,$dbname);
-                
-    if($conn==true)
-                
-    {
-                  
-    $cmd="insert into loan_applicants values('','$fn','$ln','$g','$e','$p','$dob','$lt','$la','$mda','$d','$c','$en')";
-
-    if($conn->query($cmd)==true)
-                  
-    {
-      
-         
-    echo "Thanks for your feedback";
-                  
-    }
-                
-    }
-                
-    else{
-                  
-    echo "ERROR: connection problem";
-    $cmd->close();
-    $conn->cloase();
-                
-    }
-              
-    }
-    ?>
-
-      
+      </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 
