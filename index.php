@@ -1,5 +1,6 @@
 <?php 
-include 'db.php';        
+include 'db.php';
+
 if(isset($_POST['t1']))
     {
     $fn=$_POST['p1'];           
@@ -14,14 +15,13 @@ if(isset($_POST['t1']))
     $d=$_POST['p10'];
     $c=$_POST['p11'];
     $en=$_POST['p12'];
-<<<<<<< HEAD
     $cmd="insert into loan_applicants (FirstName, Lastname, Gender, Email, Phone, DOB, LoanType, LoanAmount, MDA, Designation, Confirmation, EmployeeNumber) values('$fn','$ln','$g','$e','$p','$dob','$lt','$la','$mda','$d','$c','$en')";
-=======
-    $cmd="insert into loanapplicants (FirstName, Lastname, Gender, Email, Phone, DOB, LoanType, LoanAmount, MDA, Designation, Confirmation, EmployeeNumber) values('$fn','$ln','$g','$e','$p','$dob','$lt','$la','$mda','$d','$c','$en')";
->>>>>>> 71995a940f7e02af76f3e2ad8390940dbc8d8d77
 
     if(mysqli_query($conn, $cmd))
     {
+      // Set a form submitted cookie to be able to go to the uploads page
+      // Expires in 30 days
+      setcookie("form_submitted", "true", time() + (86400 * 30), "/");
       header('Location: uploads.php');
       exit();
     }

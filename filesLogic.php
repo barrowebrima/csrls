@@ -32,10 +32,12 @@ if (isset($_POST['save'])) { // if save button on the form is clicked
         if (move_uploaded_file($file, $destination)) {
             $sql = "INSERT INTO files (name, size, downloads) VALUES ('$filename', $size, 0)";
             if (mysqli_query($conn, $sql)) {
-                echo "<h3 style='text-align:center;color:blue;'>File uploaded successfully. It will now be reviewed by our team</h3>";
+                // Reset the form submitted cookie so that the user can access upload page again
+                setcookie("form_submitted", "false", time() + (86400 * 30), "/");
+                $GLOBALS["upload_message"] = "<h3 style='text-align:center;color:blue;'>File uploaded successfully. It will now be reviewed by our team</h3>";
             }
         } else {
-            echo "<h1 style='text-align:center;color:red;'>Failed to upload file.</h1>";
+            $GLOBALS["upload_message"] = "<h1 style='text-align:center;color:red;'>Failed to upload file.</h1>";
         }
     }
 }
