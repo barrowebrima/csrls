@@ -1,4 +1,20 @@
+<?php
+// This page requires that the users should submit the form first
+// Validation 1: Check if form submitted cookie doesn't exist
+if (!isset($_COOKIE["form_submitted"])) {
+  // Redirect to home page
+  header('Location: index.php');
+  exit();
+}
+// Validation 2: Check if form has not been submitted yet
+if ($_COOKIE["form_submitted"] != "true") {
+  // Redirect to home page
+  header('Location: index.php');
+  exit();
+}
 
+include("filesLogic.php");
+?>
 
 <!DOCTYPE html>
     <html lang="en">
@@ -68,13 +84,7 @@
       </section>
 
 
-
-
-       <?php
-            include("filesLogic.php");
-
-        ?>
-
+  <?php echo $GLOBALS["upload_message"]; ?>
 
  <section class="p-5 p-lg-0 pt-lg-5 ">
       	<div>
